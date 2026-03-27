@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿   using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace my_game
 {
@@ -8,7 +9,8 @@ namespace my_game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        private Texture2D _squreTexture;
+        private Vector2 _playerPosition;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -27,6 +29,9 @@ namespace my_game
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            _squreTexture = new Texture2D(GraphicsDevice, 1, 1);
+            _squreTexture.SetData(new[] { Color.White });               
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -34,6 +39,25 @@ namespace my_game
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                _playerPosition.X--;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                _playerPosition.X++;
+            }
+
+            _playerPosition.Y++;
+
+            _playerPosition.Y--;
+
+
+            if(_playerPosition.Y <200  0)
+
+
 
             // TODO: Add your update logic here
 
@@ -43,6 +67,13 @@ namespace my_game
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_squreTexture,new Rectangle(_playerPositionX,_playerPositionX,_playerPositionY,_playerPositionY),Color.Beige);
+
+            _squreTexture.End();
+
 
             // TODO: Add your drawing code here
 
