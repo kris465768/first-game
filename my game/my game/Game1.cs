@@ -1,83 +1,98 @@
-﻿   using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
-namespace my_game
+namespace First_game;
+
+public class Game1 : Game
 {
-    public class Game1 : Game
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    private Texture2D _squareTexture;  
+    private Vector2 _playerPosition;
+    private Vector2 _playerSize;
+    private float _ground;
+
+    private Player _player;
+
+    public Game1()
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Texture2D _squreTexture;
-        private Vector2 _playerPosition;
-        public Game1()
+        _graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = "Content";
+        IsMouseVisible = true;
+
+        _graphics.PreferredBackBufferWidth = 1280;
+        _graphics.PreferredBackBufferHeight = 800;
+
+        _player = new Player(
+            new Vector2(100, 100),
+            new Vector2(40, 65)
+        );
+    }
+
+    protected override void Initialize()
+    {
+        _playerSize = new Vector2(40, 65);
+        _ground = 400;
+
+        base.Initialize();
+    }
+
+    protected override void LoadContent()
+    {
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
+        _squareTexture.SetData(new[] { Color.Beige });
+    }
+
+    protected override void Update(GameTime gameTime)
+    {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+            || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            Exit();
+
+        if (Keyboard.GetState().IsKeyDown(Keys.A))
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            _playerPosition.X--;
         }
 
-        protected override void Initialize()
+        if (Keyboard.GetState().IsKeyDown(Keys.D))
         {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
+            _playerPosition.X++;
         }
 
-        protected override void LoadContent()
+        if (_playerPosition.Y < (_ground - _playerSize.Y))
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            _squreTexture = new Texture2D(GraphicsDevice, 1, 1);
-            _squreTexture.SetData(new[] { Color.White });               
-
-            // TODO: use this.Content to load your game content here
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                _playerPosition.X--;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                _playerPosition.X++;
-            }
-
             _playerPosition.Y++;
-
-            _playerPosition.Y--;
-
-
-            if(_playerPosition.Y <200  0)
-
-
-
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+        base.Update(gameTime);
+    }
 
-            _spriteBatch.Begin();
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Draw(_squreTexture,new Rectangle(_playerPositionX,_playerPositionX,_playerPositionY,_playerPositionY),Color.Beige);
+        _spriteBatch.Begin();
 
-            _squreTexture.End();
+        _spriteBatch.Draw(
+            _squareTexture,
+            new Rectangle(
+                (int)_playerPosition.X,
+                (int)_playerPosition.Y,
+                (int)_playerSize.X,
+                (int)_playerSize.Y),
+            Color.Beige);
 
+        _spriteBatch.Draw(
+            _squareTexture,
+            new Rectangle(0, (int)_ground, 100, 100),
+            Color.DarkRed
+        );
 
-            // TODO: Add your drawing code here
+        _spriteBatch.End();
 
-            base.Draw(gameTime);
-        }
+        base.Draw(gameTime);
     }
 }
