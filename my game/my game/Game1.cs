@@ -8,7 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private Texture2D _squareTexture;  
+    private Texture2D _squareTexture;
     private Vector2 _playerPosition;
     private Vector2 _playerSize;
     private float _ground;
@@ -22,16 +22,14 @@ public class Game1 : Game
         IsMouseVisible = true;
 
         _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 800;
-
-        _player = new Player(
-            new Vector2(100, 100),
-            new Vector2(40, 65)
-        );
+        _graphics.PreferredBackBufferHeight = 800; 
     }
 
-    protected override void Initialize()
+    protected override void Initialize() 
     {
+        _player = new Player(
+            new Vector2(100, 100),
+        new Vector2(40, 65));
         _playerSize = new Vector2(40, 65);
         _ground = 400;
 
@@ -52,6 +50,33 @@ public class Game1 : Game
             || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
+        Vector2 direction ]= new Vector2();
+        if (Keyboard.GetState().IsKeyDown (Keys.A))
+        {
+            direction.X = -1;
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.D))
+        {
+            direction.X = 1;
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.W))
+        {
+            direction.Y = -1;
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.S))
+        {
+            direction.Y = 1;
+        }
+
+           _player.Move(direction);
+        if (_player.Position.Y <(_ground -_player.Size.Y))
+        {
+             
+        }
+
         if (Keyboard.GetState().IsKeyDown(Keys.A))
         {
             _playerPosition.X--;
@@ -59,12 +84,12 @@ public class Game1 : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.D))
         {
-            _playerPosition.X++;
+            _player.Position.X++;
         }
 
-        if (_playerPosition.Y < (_ground - _playerSize.Y))
+        if (_player.Position.Y < (_ground - _player.Size.Y))
         {
-            _playerPosition.Y++;
+            _player.Position.Y++;
         }
 
         base.Update(gameTime);
@@ -79,10 +104,10 @@ public class Game1 : Game
         _spriteBatch.Draw(
             _squareTexture,
             new Rectangle(
-                (int)_playerPosition.X,
-                (int)_playerPosition.Y,
-                (int)_playerSize.X,
-                (int)_playerSize.Y),
+                (int)_player.Position.X,
+                (int)_player.Position.Y,
+                (int)_player.Size.X,
+                (int)_player.Size.Y),
             Color.Beige);
 
         _spriteBatch.Draw(
