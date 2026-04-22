@@ -10,7 +10,7 @@ public class Player
     public Vector2 Position;
     public Vector2 Size;
 
-    public Player(Vector2 position, Vector2 size)
+    public Player(Vector2 position, Vector2 size) 
     {
         Position = position;
         Size = size;
@@ -19,8 +19,10 @@ public class Player
     public void Draw()
     {
     }
-    public void Move(Vector2,   step)
-    { 
-       Position += step;
+    public void Move(Vector2 step, float deltaTime)
+    {
+        if (step == Vector2.Zero)
+            step.Normalize();
+       Position += step; * _movementSpeed * deltaTime;
     }
 }

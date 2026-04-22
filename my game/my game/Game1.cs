@@ -12,6 +12,7 @@ public class Game1 : Game
     private Vector2 _playerPosition;
     private Vector2 _playerSize;
     private float _ground;
+    private float _jumpTime;
 
     private Player _player;
 
@@ -32,6 +33,8 @@ public class Game1 : Game
         new Vector2(40, 65));
         _playerSize = new Vector2(40, 65);
         _ground = 400;
+        _jumpTime = 0;
+            
 
         base.Initialize();
     }
@@ -46,11 +49,12 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
+        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
             || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        Vector2 direction ]= new Vector2();
+        Vector2 direction = new Vector2();
         if (Keyboard.GetState().IsKeyDown (Keys.A))
         {
             direction.X = -1;
@@ -61,38 +65,28 @@ public class Game1 : Game
             direction.X = 1;
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.W))
-        {
-            direction.Y = -1;
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.S))
-        {
-            direction.Y = 1;
-        }
-
-           _player.Move(direction);
         if (_player.Position.Y <(_ground -_player.Size.Y))
         {
              
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.A))
+        if (Keyboard.GetState().IsKeyDown(Keys.Space))
         {
-            _playerPosition.X--;
+            direction.Y = -200;
+            _jumpTime = 1;
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.D))
-        {
-            _player.Position.X++;
-        }
+        if(_jumpTime >= 0)
+            _jumpTime -= deltaTime;    
 
-        if (_player.Position.Y < (_ground - _player.Size.Y))
-        {
+        _player.Move(direction, deltaTime);
+
+        if  (_player.Position.Y < (_ground - _player.Size.Y))
+            {
             _player.Position.Y++;
-        }
+            }
 
-        base.Update(gameTime);
+            base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
