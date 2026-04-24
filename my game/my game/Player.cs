@@ -23,6 +23,6 @@ public class Player
     {
         if (step == Vector2.Zero)
             step.Normalize();
-       Position += step; * _movementSpeed * deltaTime;
+       Position += step * _movementSpeed * deltaTime;
     }
 }

@@ -26,28 +26,28 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Player.cs",
-              "RelativeDocumentMoniker": "my game\\Player.cs",
-              "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Player.cs*",
-              "RelativeToolTip": "my game\\Player.cs*",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T07:09:40.446Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Program.cs",
               "RelativeDocumentMoniker": "my game\\Program.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Program.cs",
               "RelativeToolTip": "my game\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T07:09:01.522Z",
+              "WhenOpened": "2026-04-24T07:12:07.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Player.cs",
+              "RelativeDocumentMoniker": "my game\\Player.cs",
+              "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Player.cs",
+              "RelativeToolTip": "my game\\Player.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAuwBkAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T07:12:00.831Z",
               "EditorCaption": ""
             },
             {
@@ -56,11 +56,11 @@
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Game1.cs",
               "RelativeDocumentMoniker": "my game\\Game1.cs",
-              "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Game1.cs*",
-              "RelativeToolTip": "my game\\Game1.cs*",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAAFsAAAAeAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Game1.cs",
+              "RelativeToolTip": "my game\\Game1.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAWwHAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T08:35:12.047Z",
+              "WhenOpened": "2026-04-24T07:11:55.28Z",
               "EditorCaption": ""
             }
           ]
