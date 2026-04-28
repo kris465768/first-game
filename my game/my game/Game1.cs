@@ -1,49 +1,52 @@
-﻿using Microsoft.Win32.SafeHandles;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace First_game;
+namespace first_game;
 
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Texture2D _squareTexture;
-    private Vector2 _playerPosition;
-    private Vector2 _playerSize;
     private float _ground;
-    private float _jumpTime;
+    private float _jumpTimer;
+    private Vector2 _screensize;
 
     private Player _player;
 
     private Texture2D _background;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-        _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 800; 
+        _screensize = new Vector2(1280, 720);
+        _graphics.PreferredBackBufferWidth = (int)_screensize.X;
+        _graphics.PreferredBackBufferHeight = (int)_screensize.Y;  
     }
 
-    protected override void Initialize() 
+    protected override void Initialize()
     {
+
+        _ground = _screensize.Y;
         _player = new Player(
-            new Vector2(100, 100),
-        new Vector2(40, 65));
-        _playerSize = new Vector2(40, 65);
-        _ground = 400;
-        _jumpTime = 0;
-            
+            new Vector2(50, 335),
+            new Vector2(40, 65)
+            );
+
+        _jumpTimer = 0;
+
 
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice); 
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+
         _background = Content.Load<Texture2D>("images/background");
 
         _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -58,38 +61,29 @@ public class Game1 : Game
             Exit();
 
         Vector2 direction = new Vector2();
-        if (Keyboard.GetState().IsKeyDown (Keys.A))
+        if (Keyboard.GetState().IsKeyDown(Keys.A))
         {
             direction.X = -1;
         }
-
         if (Keyboard.GetState().IsKeyDown(Keys.D))
         {
             direction.X = 1;
         }
-
-        if (_player.Position.Y <(_ground -_player.Size.Y))
+        if (Keyboard.GetState().IsKeyDown(Keys.Space) && (_jumpTimer <= 0))
         {
-             
+            direction.Y = -400;
+            _jumpTimer = 1;
         }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.Space))
-        {
-            direction.Y = -200;
-            _jumpTime = 1;
-        }
-
-        if(_jumpTime >= 0)
-            _jumpTime -= deltaTime;    
 
         _player.Move(direction, deltaTime);
-
-        if  (_player.Position.Y < (_ground - _player.Size.Y))
-            {
+        if (_player.Position.Y < (_ground - _player.Size.Y))
+        {
             _player.Position.Y++;
-            }
+        }
+        if (_jumpTimer >= 0)
+            _jumpTimer -= deltaTime;
 
-            base.Update(gameTime);
+        base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -98,8 +92,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
 
-        _spriteBatch.Draw(
-            _background, Vector2.Zero,Color.White);
+        _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
 
         _spriteBatch.Draw(
             _squareTexture,
@@ -109,12 +102,6 @@ public class Game1 : Game
                 (int)_player.Size.X,
                 (int)_player.Size.Y),
             Color.Beige);
-
-        _spriteBatch.Draw(
-            _squareTexture,
-            new Rectangle(0, (int)_ground, 100, 100),
-            Color.DarkRed
-        );
 
         _spriteBatch.End();
 
