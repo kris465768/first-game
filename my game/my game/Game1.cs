@@ -9,13 +9,14 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Texture2D _squareTexture;
+    private Vector2 _screenSize;
     private float _ground;
-    private float _jumpTimer;
-    private Vector2 _screensize;
+
+    private Texture2D _background;
 
     private Player _player;
 
-    private Texture2D _background;
+    private Rectangle[] _platforms;
 
     public Game1()
     {
@@ -23,22 +24,24 @@ public class Game1 : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-        _screensize = new Vector2(1280, 720);
-        _graphics.PreferredBackBufferWidth = (int)_screensize.X;
-        _graphics.PreferredBackBufferHeight = (int)_screensize.Y;  
+        _screenSize = new Vector2(1280, 720);
+        _graphics.PreferredBackBufferWidth = (int)_screenSize.X;
+        _graphics.PreferredBackBufferHeight = (int)_screenSize.Y;
+
+        _platforms = new Rectangle[3];
+        _platforms[0] = new Rectangle(200, 600, 275, 40);
+        _platforms[1] = new Rectangle(400, 400, 275, 40);
+        _platforms[2] = new Rectangle(600, 200, 275, 40);
     }
 
     protected override void Initialize()
     {
+        _ground = _screenSize.Y;
 
-        _ground = _screensize.Y;
         _player = new Player(
             new Vector2(50, 335),
             new Vector2(40, 65)
-            );
-
-        _jumpTimer = 0;
-
+        );
 
         base.Initialize();
     }
@@ -47,7 +50,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _background = Content.Load<Texture2D>("images/background");
+        _background = Content.Load<Texture2D>("Images/background");
 
         _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
         _squareTexture.SetData(new[] { Color.Beige });
@@ -56,32 +59,39 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-            || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        GamePadState gamePad = GamePad.GetState(PlayerIndex.One);
+        KeyboardState keyboard = Keyboard.GetState();
+
+        if (gamePad.Buttons.Back == ButtonState.Pressed
+            || keyboard.IsKeyDown(Keys.Escape))
             Exit();
 
         Vector2 direction = new Vector2();
-        if (Keyboard.GetState().IsKeyDown(Keys.A))
+        if (keyboard.IsKeyDown(Keys.A))
         {
             direction.X = -1;
         }
-        if (Keyboard.GetState().IsKeyDown(Keys.D))
+
+        if (keyboard.IsKeyDown(Keys.D))
         {
             direction.X = 1;
         }
-        if (Keyboard.GetState().IsKeyDown(Keys.Space) && (_jumpTimer <= 0))
+
+        if (keyboard.IsKeyDown(Keys.Space) && (_player.Velocity.Y == 0))
         {
-            direction.Y = -400;
-            _jumpTimer = 1;
+            _player.Jump();
         }
 
-        _player.Move(direction, deltaTime);
-        if (_player.Position.Y < (_ground - _player.Size.Y))
+        _player.Update(deltaTime);
+        _player.SetDirection(direction);
+
+        ResolveCollisions();
+
+        if ((_player.Position.Y + _player.Size.Y) >= _ground)
         {
-            _player.Position.Y++;
+            _player.Velocity.Y = 0;
+            _player.Position.Y = _ground - _player.Size.Y;
         }
-        if (_jumpTimer >= 0)
-            _jumpTimer -= deltaTime;
 
         base.Update(gameTime);
     }
@@ -92,7 +102,16 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
 
-        _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
+        _spriteBatch.Draw(
+            _background, Vector2.Zero, Color.White);
+
+        for (int i = 0; i < _platforms.Length; ++i)
+        {
+            _spriteBatch.Draw(
+                _squareTexture,
+                _platforms[i],
+                Color.RosyBrown);
+        }
 
         _spriteBatch.Draw(
             _squareTexture,
@@ -106,5 +125,43 @@ public class Game1 : Game
         _spriteBatch.End();
 
         base.Draw(gameTime);
+    }
+
+    private void ResolveCollisions()
+    {
+        for (int i = 0; i < _platforms.Length; i++)
+        {
+            bool isCollidingLeft = (_player.Position.X + _player.Size.X)
+                > _platforms[i].Left;
+            bool isCollidingTop = (_player.Position.Y + _player.Size.Y)
+                > _platforms[i].Top;
+            bool isCollidingRight = _player.Position.X < _platforms[i].Right;
+            bool isCollidingBottom = _player.Position.Y
+                < _platforms[i].Bottom;
+            bool isColliding = isCollidingLeft
+                && isCollidingTop
+                && isCollidingRight
+                && isCollidingBottom;
+
+            if (isColliding)
+            {
+                if ((isCollidingLeft || isCollidingRight)
+                    && (!isCollidingTop && !isCollidingBottom))
+                {
+                    _player.Velocity.X *= -1;
+                }
+
+                if (isCollidingBottom)
+                {
+                    _player.Velocity.Y *= -1;
+                }
+
+                if (isCollidingTop)
+                {
+                    _player.Velocity.Y = 0;
+                    _player.Position.Y = _platforms[i].Top - _player.Size.Y;
+                }
+            }
+        }
     }
 }
