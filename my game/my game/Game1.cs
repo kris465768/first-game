@@ -50,11 +50,15 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _background = Content.Load<Texture2D>("Images/background");
+        _background = Content.Load<Texture2D>("images/background");
 
         _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
         _squareTexture.SetData(new[] { Color.Beige });
+
+        Texture2D playerTexture = Content.Load<Texture2D>("images/main-character-sqr");
+        _player.LoadContent(playerTexture);
     }
+
 
     protected override void Update(GameTime gameTime)
     {
@@ -113,15 +117,7 @@ public class Game1 : Game
                 Color.RosyBrown);
         }
 
-        _spriteBatch.Draw(
-            _squareTexture,
-            new Rectangle(
-                (int)_player.Position.X,
-                (int)_player.Position.Y,
-                (int)_player.Size.X,
-                (int)_player.Size.Y),
-            Color.Beige);
-
+        _player.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
