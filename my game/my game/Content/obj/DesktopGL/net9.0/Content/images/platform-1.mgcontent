@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/images/Gemini_Generated_Image_3vth473vth473vth (1).png</SourceFile>
-  <SourceTime>2026-06-02T10:51:31.0352183+03:00</SourceTime>
-  <DestFile>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/bin/DesktopGL/images/background.xnb</DestFile>
-  <DestTime>2026-06-03T09:31:14.9899536+03:00</DestTime>
+  <SourceFile>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/images/ChatGPT_Image_Jun_3__2026__09_11_59_AM-removebg-preview (3).png</SourceFile>
+  <SourceTime>2026-06-03T09:12:28.1209697+03:00</SourceTime>
+  <DestFile>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/bin/DesktopGL/Content/images/platform-1.xnb</DestFile>
+  <DestTime>2026-06-03T09:31:42.8068901+03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T17:25:32+03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

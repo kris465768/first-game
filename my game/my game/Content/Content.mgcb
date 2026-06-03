@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin images/ChatGPT_Image_Jun_3__2026__09_11_59_AM-removebg-preview (3).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/ChatGPT_Image_Jun_3__2026__09_11_59_AM-removebg-preview (3).png;images/platform-1.png
+
 #begin images/Gemini_Generated_Image_3vth473vth473vth (1).png
 /importer:TextureImporter
 /processor:TextureProcessor

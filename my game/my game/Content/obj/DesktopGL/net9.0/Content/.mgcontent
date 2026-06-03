@@ -4,10 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/images/ChatGPT_Image_Jun_3__2026__09_11_59_AM-removebg-preview (3).png</File>
     <File>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/images/Gemini_Generated_Image_3vth473vth473vth (1).png</File>
     <File>C:/Users/Student/Documents/GitHub/first-game/my game/my game/Content/images/main-character-sqr.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>images/platform-1.png</File>
     <File>images/background.png</File>
     <File xsi:nil="true" />
   </DestFiles>

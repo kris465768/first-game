@@ -11,8 +11,10 @@ public class Game1 : Game
     private Texture2D _squareTexture;
     private Vector2 _screenSize;
     private float _ground;
-
+ 
     private Texture2D _background;
+
+    private Texture2D _platformTexture;
 
     private Player _player;
 
@@ -29,9 +31,9 @@ public class Game1 : Game
         _graphics.PreferredBackBufferHeight = (int)_screenSize.Y;
 
         _platforms = new Rectangle[3];
-        _platforms[0] = new Rectangle(200, 600, 275, 40);
-        _platforms[1] = new Rectangle(400, 400, 275, 40);
-        _platforms[2] = new Rectangle(600, 200, 275, 40);
+        _platforms[0] = new Rectangle(200, 600, 150, 100);
+        _platforms[1] = new Rectangle(400, 400, 150, 100);
+        _platforms[2] = new Rectangle(600, 200, 150, 100);
     }
 
     protected override void Initialize()
@@ -51,6 +53,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         _background = Content.Load<Texture2D>("images/background");
+        _platformTexture = Content.Load<Texture2D>("images/platform-1");
 
         _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
         _squareTexture.SetData(new[] { Color.Beige });
@@ -112,7 +115,7 @@ public class Game1 : Game
         for (int i = 0; i < _platforms.Length; ++i)
         {
             _spriteBatch.Draw(
-                _squareTexture,
+                _platformTexture,
                 _platforms[i],
                 Color.RosyBrown);
         }

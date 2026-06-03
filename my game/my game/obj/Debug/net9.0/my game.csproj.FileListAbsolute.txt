@@ -69,3 +69,5 @@ C:\Users\Student\Documents\first-game\my game\my game\obj\Debug\net9.0\my game.p
 C:\Users\Student\Documents\first-game\my game\my game\obj\Debug\net9.0\my game.genruntimeconfig.cache
 C:\Users\Student\Documents\first-game\my game\my game\obj\Debug\net9.0\ref\my game.dll
 C:\Users\Student\Documents\GitHub\first-game\my game\my game\bin\Debug\net9.0\Content\images\main-character-sqr.xnb
+C:\Users\Student\Documents\GitHub\first-game\my game\my game\bin\Debug\net9.0\Content\images\ChatGPT_Image_Jun_3__2026__09_11_59_AM-removebg-preview (3).xnb
+C:\Users\Student\Documents\GitHub\first-game\my game\my game\bin\Debug\net9.0\Content\images\platform-1.xnb

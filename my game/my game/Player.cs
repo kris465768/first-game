@@ -8,7 +8,7 @@ public class Player
     private const float _jumpForce = 450f;
 
     private float _movementSpeed;
-    private Texture _texture;
+    private Texture2D _texture;
 
     public Vector2 Position;
     public Vector2 Size;
@@ -42,7 +42,7 @@ public class Player
 
     public void Draw(SpriteBatch spriteBatch) 
     {
-        spriteBatch.Draw(_texture, new Rectangle(Position.ToPoint(), Size.ToPoint()), null, Color.Aqua);
+        spriteBatch.Draw(_texture, new Rectangle(Position.ToPoint(), Size.ToPoint()), Color.White);
     }
 
     public void SetDirection(Vector2 direction)
