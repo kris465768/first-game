@@ -38,8 +38,7 @@
               "RelativeToolTip": "my game\\Enemy.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T08:00:11.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T08:00:11.658Z"
             },
             {
               "$type": "Document",
@@ -49,7 +48,7 @@
               "RelativeDocumentMoniker": "my game\\Player.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Player.cs",
               "RelativeToolTip": "my game\\Player.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwCkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAADsAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-17T07:09:40.446Z",
               "EditorCaption": ""
@@ -64,8 +63,7 @@
               "RelativeToolTip": "my game\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T07:09:01.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-17T07:09:01.522Z"
             },
             {
               "$type": "Document",
@@ -75,7 +73,7 @@
               "RelativeDocumentMoniker": "my game\\Game1.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\GitHub\\first-game\\my game\\my game\\Game1.cs",
               "RelativeToolTip": "my game\\Game1.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwCIAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAmwH0AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-27T08:35:12.047Z",
               "EditorCaption": ""

@@ -11,7 +11,7 @@ public class Game1 : Game
     private Texture2D _squareTexture;
     private Vector2 _screenSize;
     private float _ground;
- 
+
     private Texture2D _background;
 
     private Texture2D _platformTexture;
@@ -128,39 +128,12 @@ public class Game1 : Game
 
     private void ResolveCollisions()
     {
-        for (int i = 0; i < _platforms.Length; i++)
-        {
-            bool isCollidingLeft = (_player.Position.X + _player.Size.X)
-                > _platforms[i].Left;
-            bool isCollidingTop = (_player.Position.Y + _player.Size.Y)
-                > _platforms[i].Top;
-            bool isCollidingRight = _player.Position.X < _platforms[i].Right;
-            bool isCollidingBottom = _player.Position.Y
-                < _platforms[i].Bottom;
-            bool isColliding = isCollidingLeft
-                && isCollidingTop
-                && isCollidingRight
-                && isCollidingBottom;
 
-            if (isColliding)
-            {
-                if ((isCollidingLeft || isCollidingRight)
-                    && (!isCollidingTop && !isCollidingBottom))
-                {
-                    _player.Velocity.X *= -1;
-                }
+    }
 
-                if (isCollidingBottom)
-                {
-                    _player.Velocity.Y *= -1;
-                }
+    private Vector2 GetCollisionData(Rectangle a,Rectangle b) 
+    
+    {
 
-                if (isCollidingTop)
-                {
-                    _player.Velocity.Y = 0;
-                    _player.Position.Y = _platforms[i].Top - _player.Size.Y;
-                }
-            }
-        }
     }
 }
