@@ -13,12 +13,12 @@ public class Game1 : Game
     private float _ground;
 
     private Texture2D _background;
-
     private Texture2D _platformTexture;
+    private Texture2D _platformsSpriteSheet;
 
     private Player _player;
 
-    private Rectangle[] _platforms;
+    private Platform[] _platforms;
 
     public Game1()
     {
@@ -30,10 +30,19 @@ public class Game1 : Game
         _graphics.PreferredBackBufferWidth = (int)_screenSize.X;
         _graphics.PreferredBackBufferHeight = (int)_screenSize.Y;
 
-        _platforms = new Rectangle[3];
-        _platforms[0] = new Rectangle(200, 600, 150, 100);
-        _platforms[1] = new Rectangle(400, 400, 150, 100);
-        _platforms[2] = new Rectangle(600, 200, 150, 100);
+        _platforms = new Platform[3];
+        _platforms[0] = new Platform(
+            new Vector2(200, 600),
+            new Vector2(275, 40)
+        );
+        _platforms[1] = new Platform(
+            new Vector2(400, 400),
+            new Vector2(275, 40)
+        );
+        _platforms[2] = new Platform(
+            new Vector2(600, 200),
+            new Vector2(275, 40)
+        );
     }
 
     protected override void Initialize()
@@ -52,16 +61,21 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _background = Content.Load<Texture2D>("images/background");
-        _platformTexture = Content.Load<Texture2D>("images/platform-1");
+        _background = Content.Load<Texture2D>("Images/background");
+        _platformTexture = Content.Load<Texture2D>("Images/platform-1");
+        //_platformsSpriteSheet = Content.Load<Texture2D>("Images/platforms");
 
         _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
         _squareTexture.SetData(new[] { Color.Beige });
 
-        Texture2D playerTexture = Content.Load<Texture2D>("images/main-character-sqr");
+        Texture2D playerTexture = Content.Load<Texture2D>("Images/main-character-sqr");
         _player.LoadContent(playerTexture);
-    }
 
+        for(int i = 0;  i < _platforms.Length; i++)
+        {
+            _platforms[i].LoadContent(_platformTexture);
+        }
+    }
 
     protected override void Update(GameTime gameTime)
     {
@@ -98,6 +112,7 @@ public class Game1 : Game
         {
             _player.Velocity.Y = 0;
             _player.Position.Y = _ground - _player.Size.Y;
+            _player.Collider.Location = _player.Position.ToPoint();
         }
 
         base.Update(gameTime);
@@ -114,13 +129,11 @@ public class Game1 : Game
 
         for (int i = 0; i < _platforms.Length; ++i)
         {
-            _spriteBatch.Draw(
-                _platformTexture,
-                _platforms[i],
-                Color.RosyBrown);
+            _platforms[i].Draw(_spriteBatch);
         }
 
         _player.Draw(_spriteBatch);
+
         _spriteBatch.End();
 
         base.Draw(gameTime);
@@ -128,12 +141,49 @@ public class Game1 : Game
 
     private void ResolveCollisions()
     {
-
+        for (int i = 0; i < _platforms.Length; i++)
+        {
+            Vector2 collisionData = GetCollisionData(_player.Collider, _platforms[i].Collider);
+            if (collisionData == Vector2.Zero)
+                continue;
+            _player.Position += collisionData;
+            _player.Collider.Location = _player.Position.ToPoint();
+            if (collisionData.X != 0)
+            {
+                _player.Velocity.X = 0;
+            }
+            else
+            {
+                if (collisionData.Y < 0)
+                {
+                    _player.Velocity.Y = 0;
+                }
+                else
+                {
+                    _player.Velocity.Y = 0.1f;
+                }
+            }
+        }
     }
 
-    private Vector2 GetCollisionData(Rectangle a,Rectangle b) 
-    
+    private Vector2 GetCollisionData(Rectangle a, Rectangle b)
     {
-
+        Vector2 result = Vector2.Zero;
+        if (a.Intersects(b))
+        {
+            Rectangle overlap = Rectangle.Intersect(a, b);
+            if (overlap.Width < overlap.Height)
+            {
+                int direction = a.Center.X < b.Center.X ? -overlap.Width : overlap.Width;
+                result.X = direction;
+            }
+            else
+            {
+                int direction = a.Center.Y < b.Center.Y ? -overlap.Height : overlap.Height;
+                result.Y = direction;
+            }
+        }
+        return result;
     }
+
 }
