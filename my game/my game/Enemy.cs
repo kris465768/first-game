@@ -1,12 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
-namespace my_game
+public class Enemy
 {
-    internal class Enemy
+    private const float _gravity = 9.8f;
+    private const float _jumpForce = 350f;
+
+    private float _movementSpeed;
+    private Texture2D _texture;
+
+    public Vector2 Position;
+    public Vector2 Size;
+
+    public Vector2 Velocity;
+
+    public Enemy(Vector2 position, Vector2 size)
     {
+        Position = position;
+        Size = size;
+
+        _movementSpeed = 300;
+    }
+
+    public void LoadContent(Texture2D texture)
+    {
+        _texture = texture;
+    }
+
+    public void Update(float dt)
+    {
+        Velocity.Y += _gravity;
+
+        Position.X += Velocity.X * _movementSpeed * dt;
+        Position.Y += Velocity.Y * dt;
+    }
+
+    public void Jump()
+    {
+        Velocity.Y -= _jumpForce;
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(
+            _texture,
+            new Rectangle(
+                (int)Position.X,
+                (int)Position.Y,
+                (int)Size.X,
+                (int)Size.Y),
+            Color.Red);
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        Velocity.X = direction.X;
     }
 }

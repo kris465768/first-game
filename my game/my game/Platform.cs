@@ -31,10 +31,11 @@ public class Platform
          null,
           Color.White,
           0,
-          Vector2.Zero,
-          Vector2.One * 0.5f,
+          new Vector2(32,46),
+          new Vector2( 0.35f, 0.4f),
           SpriteEffects.None,
           0
           );
+
     }
 }
